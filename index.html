@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief Bot - Text Summarizer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js for code blocks in markdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo">
+                <i data-lucide="align-left" class="logo-icon"></i>
+                <h1>Brief Bot</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="settingsBtn" class="btn btn-secondary">
+                <i data-lucide="settings"></i> Settings
+            </button>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <div class="panel input-panel">
+            <div class="panel-header">
+                <h2>Source Text</h2>
+                <button id="clearBtn" class="btn btn-icon" title="Clear input">
+                    <i data-lucide="trash-2"></i>
+                </button>
+            </div>
+            
+            <div class="controls-row">
+                <div class="control-group">
+                    <label for="styleSelect">Style</label>
+                    <select id="styleSelect" class="form-select">
+                        <option value="Executive Summary">Executive Summary</option>
+                        <option value="Bullet Points">Bullet Points</option>
+                        <option value="One Paragraph">One Paragraph</option>
+                        <option value="Key Takeaways">Key Takeaways</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="lengthSelect">Length</label>
+                    <select id="lengthSelect" class="form-select">
+                        <option value="Short (1-2 sentences)">Short (1-2 sentences)</option>
+                        <option value="Medium (paragraph)">Medium (paragraph)</option>
+                        <option value="Detailed (multiple paragraphs)">Detailed (multiple paragraphs)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="textarea-container">
+                <textarea id="sourceText" placeholder="Paste or type your text here to summarize..."></textarea>
+                <div class="text-metrics">
+                    <span id="wordCount">0 words</span>
+                    <span id="charCount">0 characters</span>
+                </div>
+            </div>
+
+            <button id="summarizeBtn" class="btn btn-primary btn-large">
+                <i data-lucide="zap"></i> Summarize
+            </button>
+        </div>
+
+        <div class="panel output-panel">
+            <div class="panel-header">
+                <h2>Summary</h2>
+                <div class="output-actions">
+                    <button id="copyBtn" class="btn btn-secondary" title="Copy to clipboard" disabled>
+                        <i data-lucide="copy"></i> Copy
+                    </button>
+                    <button id="downloadBtn" class="btn btn-secondary" title="Download .txt" disabled>
+                        <i data-lucide="download"></i> Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="output-content-wrapper">
+                <div id="outputContent" class="output-content markdown-body">
+                    <div class="placeholder-state">
+                        <i data-lucide="file-text"></i>
+                        <p>Your summary will appear here</p>
+                    </div>
+                </div>
+                <div id="loadingOverlay" class="loading-overlay hidden">
+                    <div class="spinner"></div>
+                    <p>Generating summary...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button id="closeSettingsBtn" class="btn btn-icon">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="apiKey">GROQ API Key</label>
+                    <input type="password" id="apiKey" class="form-input" placeholder="gsk_...">
+                    <p class="help-text">Your key is stored securely in your browser's local storage and never sent anywhere except the GROQ API.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettingsBtn" class="btn btn-primary">Save Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

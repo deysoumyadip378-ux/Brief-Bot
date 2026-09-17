@@ -91,7 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
         summarizeBtn.disabled = text.trim().length === 0;
     }
 
-    async function handleSummarize() {
+    /**
+ * Handles text summarization by fetching settings, constructing
+ * prompt templates, and invoking the Groq chat completions endpoint.
+ * @returns {Promise<void>}
+ */
+async function handleSummarize() {
         const text = sourceText.value.trim();
         const apiKey = localStorage.getItem('groq_api_key') || DEFAULT_GROQ_KEY;
         

@@ -28,3 +28,12 @@ An intelligent text condensation tool powered by Groq's fast `llama-3.1-8b-insta
 
 ## 🛡️ License
 Licensed under the [MIT License](LICENSE).
+
+## 🛠️ Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Vanilla JavaScript (ES6+), HTML5, CSS3 |
+| Inference Engine | Groq Cloud LPU |
+| Markdown Parser | Marked.js |
+| Syntax Highlighter | Highlight.js |

@@ -18,3 +18,13 @@ An intelligent text condensation tool powered by Groq's fast `llama-3.1-8b-insta
 2. Click **Settings (⚙️)** to configure your Groq API Key.
 3. Paste or type your text in the source panel.
 4. Select your desired summary style and length, then click **Summarize**!
+
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl` / `Cmd` + `Enter` | Trigger Summarization |
+| `Esc` | Close Settings Dialog |
+
+## 🛡️ License
+Licensed under the [MIT License](LICENSE).

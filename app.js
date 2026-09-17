@@ -53,6 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     summarizeBtn.addEventListener('click', handleSummarize);
+    
+    // Keyboard shortcut: Ctrl+Enter or Cmd+Enter to run summarizer
+    inputText.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            handleSummarize();
+        }
+    });
     copyBtn.addEventListener('click', copyToClipboard);
     downloadBtn.addEventListener('click', downloadSummary);
 

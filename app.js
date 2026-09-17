@@ -243,3 +243,12 @@ async function handleSummarize() {
     // Initial setup
     updateTextMetrics();
 });
+
+
+// Character count indicator
+if (inputText) {
+    inputText.addEventListener('input', () => {
+        const len = inputText.value.trim().length;
+        console.debug(`[BriefBot] Character count: ${len}`);
+    });
+}

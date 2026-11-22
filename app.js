@@ -54,8 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     summarizeBtn.addEventListener('click', handleSummarize);
     
+    // Preset Sample Text Loader
+    const PRESETS = {
+        research: "Autonomous multi-agent architectures running on decentralized WebAssembly runtimes offer deterministic execution, strict computational resource boundaries, and atomic settlement guarantees. By combining Soroban smart contract host environments with localized off-chain inference pipelines, decentralized applications achieve high-throughput micro-transactions without compromising state verification. In this work, we evaluate state transition latency and gas metering across 10,000 continuous token streaming intervals, demonstrating an 84% reduction in memory overhead compared to traditional EVM virtual machines.",
+        executive: "Q4 Engineering Synopsis: Over the past 90 days, the core platform infrastructure completed transition to Soroban Protocol 22, successfully deploying the new decentralized prediction market engine and escrow settlement modules. Active developer adoption increased 38% month-over-month, while operational infrastructure latency dropped from 4.2 seconds to 850 milliseconds. Key priorities for Q1 include launching cross-chain USDC bridging via CCTP, expanding community developer bounties, and completing external security auditing for the automated oracle consensus layer.",
+        legal: "Service Level Agreement (SLA) & Uptime Commitment: The Provider covenants that the Production API Gateway and Distributed Consensus Nodes shall maintain a System Availability Rate of at least 99.95% during each calendar billing month. In the event of an unexcused service interruption exceeding 15 consecutive minutes, Customer shall be entitled to receive a pro-rata Service Credit equivalent to 10% of monthly subscription fees. Neither party shall be liable for indirect, punitive, or consequential damages arising from upstream cryptographic validator partition events."
+    };
+
+    document.querySelectorAll('.preset-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const presetKey = btn.getAttribute('data-preset');
+            if (PRESETS[presetKey]) {
+                sourceText.value = PRESETS[presetKey];
+                updateTextMetrics();
+                sourceText.focus();
+            }
+        });
+    });
+
     // Keyboard shortcut: Ctrl+Enter or Cmd+Enter to run summarizer
-    inputText.addEventListener('keydown', (e) => {
+    sourceText.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             e.preventDefault();
             handleSummarize();
